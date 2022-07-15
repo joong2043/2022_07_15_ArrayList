@@ -11,21 +11,26 @@
 class ArrayList {
 
     private int size;
+    private int[] datum;
 
     public ArrayList() {
         size = 0;
+        datum = new int[2];
     }
 
     public int size() {
         return size;
     }
 
-    public void add(int i) {
+    public void add(int data) {
+        sizeUpIfFull();
+
+        datum[size]=data;
         size++;
     }
 
     public int get(int i) {
-        return 100;
+        return datum[i];
     }
 
     public void showAllValues() {
@@ -33,4 +38,25 @@ class ArrayList {
 
     public void removeAt(int i) {
     }
+
+    private void sizeUpIfFull(){
+        if(isFull()){
+            sizeUp();
+        }
+    }
+
+    private void sizeUp(){
+        int[] newDatum = new int[datum.length*2];
+
+        for(int i =0;i<datum.length;i++){
+            newDatum[i]=datum[i];
+        }
+
+        datum = newDatum;
+    }
+
+    private boolean isFull(){
+        return size == datum.length;
+    }
+
 }
